@@ -4,15 +4,25 @@ import { useState } from "react";
 
 function App() {
   const [data, setData] = useState({
-    labels: [10, 20, 30, 40, 10],
+    labels: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
     datasets: [
       {
-        data: [10, 20, 30, 40, 10],
-        backgroundColor: ["rgb(248,248,248)"],
+        data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+        backgroundColor: [
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+          "rgb(248,248,248)",
+        ],
       },
     ],
   });
-
   const [sorting, setSorting] = useState(true);
 
   var options = {
@@ -45,46 +55,58 @@ function App() {
       },
     },
     events: [],
+    animation: false,
   };
 
-  // const alg = () => {
-  //   const state = data.datasets[0].data;
-  //   for (let i = 0; i < 5; i++) {
-  //     for (let j = 0; j < 5; j++) {
-  //       // console.log(state);
-  //       if (state[i] > state[j]) {
-  //         let temp = 0;
-  //         temp = state[i];
-  //         state[i] = state[j];
-  //         state[j] = temp;
-  //         // console.log(state);
-  //         setTimeout(
-  //           (s, i, j) => {
-  //             if (state[i] > state[j]) {
-  //               let temp = 0;
-  //               temp = state[i];
-  //               state[i] = state[j];
-  //               state[j] = temp;
-  //             }
-  //             setData((prev) => {
-  //               const newState = { ...prev };
-  //               console.log(newState);
-  //               console.log(s);
-  //               newState.datasets[0].data = s;
-  //               return newState;
-  //             });
-  //           },
-  //           5000,
-  //           state,
-  //           i,
-  //           j
-  //         );
-  //       }
-  //     }
-  //   }
-  //   setSorting(false);
-  // };
-  // if (sorting) alg();
+  const sort = () => {
+    const arr = data.datasets[0].data;
+    let c = 0;
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        setTimeout(
+          (arr, i, j) => {
+            setData((prev) => {
+              const new_data = { ...prev };
+              new_data.datasets[0].data = [...arr];
+              new_data.labels = [...arr];
+              new_data.datasets[0].backgroundColor = [
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+                "rgb(248,248,248)",
+              ];
+              new_data.datasets[0].backgroundColor[i] = "red";
+              new_data.datasets[0].backgroundColor[j] = "red";
+              // console.log(arr);
+              console.log(`${i}  ${j}`);
+              return new_data;
+            });
+          },
+          100 * c,
+          [...arr],
+          i,
+          j,
+          c
+        );
+        c++;
+        if (arr[i] > arr[j]) {
+          let temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+          // console.log(arr);
+        }
+      }
+    }
+    setSorting(false);
+  };
+
+  if (sorting) sort();
 
   return (
     <div className="App">
