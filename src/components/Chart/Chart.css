@@ -1,0 +1,7 @@
+.chart {
+  width: 95%;
+  margin: 0 auto;
+  height: 350px;
+  background-color: rgb(199, 199, 204);
+  border: 1px solid lightgray;
+}
