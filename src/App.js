@@ -1,7 +1,13 @@
 import "./App.css";
 import { useState } from "react";
 import Chart from "./components/Chart/Chart";
+import Select from "./components/Select/Select";
+import Button from "./components/Button/Button";
 import { useEffect } from "react";
+
+import generateArray from "./helpers/generateArray";
+import bubbleSort from "./helpers/bubbleSort";
+import selectionSort from "./helpers/selectionSort";
 
 function App() {
   const [data, setData] = useState([]);
@@ -10,25 +16,13 @@ function App() {
   const [completed, setCompleted] = useState([]);
   const [size, setSize] = useState(10);
   const [speed, setSpeed] = useState(1);
-
-  // console.log(completed);
-  console.log(completed);
+  const [algType, setAlgType] = useState(0);
 
   useEffect(() => {
     const arr = generateArray(size);
     setCompleted([]);
     setData([...arr]);
-  }, [size]);
-
-  const generateArray = (size) => {
-    const arr = [];
-    for (let i = 0; i < size; i++) {
-      const num = Math.round(Math.random() * 100) + 1;
-      // console.log(num);
-      arr.push(num);
-    }
-    return [...arr];
-  };
+  }, [size, speed, algType]);
 
   const alterStateAfterTimeOut = (arr, i, j, c, cond, index) => {
     setTimeout(
@@ -43,6 +37,9 @@ function App() {
             return [...next];
           });
         }
+        if (i === -1 && j === -1) {
+          setIsSorting(false);
+        }
       },
       (500 * c) / speed,
       [...arr],
@@ -53,111 +50,70 @@ function App() {
     );
   };
 
-  const bubbleSort = () => {
-    const array = [...data];
-    let count = 0;
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = 0; j < array.length - i - 1; j++) {
-        alterStateAfterTimeOut(
-          array,
-          j,
-          j + 1,
-          count,
-          j === 0,
-          array.length - i
-        );
-        count++;
-        if (array[j] > array[j + 1]) {
-          let temp = array[j];
-          array[j] = array[j + 1];
-          array[j + 1] = temp;
-          // console.log(arr);
-        }
-      }
-    }
-    alterStateAfterTimeOut(array, 0, 1, count, true, 1);
-    alterStateAfterTimeOut(array, 0, 1, count, true, 0);
-    alterStateAfterTimeOut(array, -1, -1, count);
-  };
-
-  const selectionSort = () => {
-    const array = [...data];
-    let count = 0;
-    for (let i = 0; i < array.length; i++) {
-      let index = i;
-      for (let j = i + 1; j < array.length; j++) {
-        alterStateAfterTimeOut(array, i, j, count, j === i + 1, i - 1);
-        count++;
-        if (array[index] > array[j]) {
-          index = j;
-          // console.log(arr);
-        }
-      }
-      let temp = array[i];
-      array[i] = array[index];
-      array[index] = temp;
-    }
-    alterStateAfterTimeOut(
-      array,
-      array.length - 1,
-      array.length - 2,
-      count,
-      true,
-      array.length - 2
-    );
-    alterStateAfterTimeOut(
-      array,
-      array.length - 1,
-      array.length - 2,
-      count,
-      true,
-      array.length - 1
-    );
-  };
-
   const sortClickHandler = () => {
     setCompleted([]);
     setIsSorting(true);
-    // bubbleSort();
-    selectionSort();
-    setIsSorting(false);
+    algorithms[algType](alterStateAfterTimeOut, data);
   };
 
   const randomizeClickHandler = () => {
+    setCompleted([]);
     const arr = generateArray(size);
     setData([...arr]);
   };
 
   const sizeChangeHandler = (e) => {
     setSize(+e.target.value);
-    // console.log(e.target.value);
   };
 
   const speedChangeHandler = (e) => {
     setSpeed(+e.target.value);
   };
 
+  const algChangeHandler = (e) => {
+    setAlgType(+e.target.value);
+  };
+
+  const algorithms = {
+    0: bubbleSort,
+    1: selectionSort,
+  };
+
   return (
     <div className="App">
       <h1>Sorting Visualizer</h1>
       <Chart data={data} currIJ={currIJ} completed={completed} />
-      <button onClick={sortClickHandler}>Sort</button>
-      <button onClick={randomizeClickHandler}>Randomize</button>
-      <select value={`${size}`} onChange={sizeChangeHandler}>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="75">75</option>
-        <option value="100">100</option>
-      </select>
-      <select value={`${speed}`} onChange={speedChangeHandler}>
-        <option value="0.25">0.25x</option>
-        <option value="0.5">0.5x</option>
-        <option value="1">1x</option>
-        <option value="2">2x</option>
-        <option value="4">4x</option>
-      </select>
+      <Button
+        btnName="Sort"
+        onClickHandler={sortClickHandler}
+        isDisabled={isSorting}
+      />
+      <Button
+        btnName="Randomize"
+        onClickHandler={randomizeClickHandler}
+        isDisabled={isSorting}
+      />
+      <Select
+        value={algType}
+        onChangeHandler={algChangeHandler}
+        values={[0, 1]}
+        options={["Bubble Sort", "Selection Sort"]}
+        isDisabled={isSorting}
+      />
+      <Select
+        value={size}
+        onChangeHandler={sizeChangeHandler}
+        values={[5, 10, 25, 50, 75, 100]}
+        options={[5, 10, 25, 50, 75, 100]}
+        isDisabled={isSorting}
+      />
+      <Select
+        value={speed}
+        onChangeHandler={speedChangeHandler}
+        values={[0.25, 0.5, 1, 2, 4]}
+        options={["0.25x", "0.5x", "1x", "2x", "4x"]}
+        isDisabled={isSorting}
+      />
     </div>
   );
 }
