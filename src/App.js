@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import Chart from "./components/Chart/Chart";
-import Select from "./components/Select/Select";
 import Button from "./components/Button/Button";
+import Navbar from "./components/Navbar/Navbar";
 import { useEffect } from "react";
 
 import generateArray from "./helpers/generateArray";
@@ -81,38 +81,22 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Sorting Visualizer</h1>
+      <Navbar
+        isSorting={isSorting}
+        randomizeClickHandler={randomizeClickHandler}
+        algType={algType}
+        algChangeHandler={algChangeHandler}
+        sizeChangeHandler={sizeChangeHandler}
+        size={size}
+        speed={speed}
+        speedChangeHandler={speedChangeHandler}
+      />
       <Chart data={data} currIJ={currIJ} completed={completed} />
       <Button
         btnName="Sort"
         onClickHandler={sortClickHandler}
         isDisabled={isSorting}
-      />
-      <Button
-        btnName="Randomize"
-        onClickHandler={randomizeClickHandler}
-        isDisabled={isSorting}
-      />
-      <Select
-        value={algType}
-        onChangeHandler={algChangeHandler}
-        values={[0, 1]}
-        options={["Bubble Sort", "Selection Sort"]}
-        isDisabled={isSorting}
-      />
-      <Select
-        value={size}
-        onChangeHandler={sizeChangeHandler}
-        values={[5, 10, 25, 50, 75, 100]}
-        options={[5, 10, 25, 50, 75, 100]}
-        isDisabled={isSorting}
-      />
-      <Select
-        value={speed}
-        onChangeHandler={speedChangeHandler}
-        values={[0.25, 0.5, 1, 2, 4]}
-        options={["0.25x", "0.5x", "1x", "2x", "4x"]}
-        isDisabled={isSorting}
+        className="sort"
       />
     </div>
   );
