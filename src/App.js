@@ -8,11 +8,13 @@ import { useEffect } from "react";
 import generateArray from "./helpers/generateArray";
 import bubbleSort from "./helpers/bubbleSort";
 import selectionSort from "./helpers/selectionSort";
+import insertionSort from "./helpers/insertionSort";
 
 function App() {
   const [data, setData] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
   const [currIJ, setCurrIJ] = useState({ i: -1, j: -1 });
+  const [color, setColor] = useState("red");
   const [completed, setCompleted] = useState([]);
   const [size, setSize] = useState(10);
   const [speed, setSpeed] = useState(1);
@@ -24,11 +26,12 @@ function App() {
     setData([...arr]);
   }, [size, speed, algType]);
 
-  const alterStateAfterTimeOut = (arr, i, j, c, cond, index) => {
+  const alterStateAfterTimeOut = (arr, i, j, c, cond, index, color) => {
     setTimeout(
       (arr, i, j, c) => {
         setData(arr);
         setCurrIJ({ i, j });
+        setColor(color ? color : "red");
         // if (c === arr.length) setIsSorting(false);
         if (cond) {
           setCompleted((prev) => {
@@ -77,6 +80,7 @@ function App() {
   const algorithms = {
     0: bubbleSort,
     1: selectionSort,
+    2: insertionSort,
   };
 
   return (
@@ -91,7 +95,7 @@ function App() {
         speed={speed}
         speedChangeHandler={speedChangeHandler}
       />
-      <Chart data={data} currIJ={currIJ} completed={completed} />
+      <Chart data={data} currIJ={currIJ} completed={completed} color={color} />
       <Button
         btnName="Sort"
         onClickHandler={sortClickHandler}

@@ -15,8 +15,8 @@ const Navbar = (props) => {
         <Select
           value={props.algType}
           onChangeHandler={props.algChangeHandler}
-          values={[0, 1]}
-          options={["Bubble Sort", "Selection Sort"]}
+          values={[0, 1, 2]}
+          options={["Bubble Sort", "Selection Sort", "Insertion Sort"]}
           isDisabled={props.isSorting}
         />
         <Select

@@ -44,7 +44,7 @@ const Chart = (props) => {
   };
   const backgroundColor = props.data.map((el, i) => {
     return i === props.currIJ.i || i === props.currIJ.j
-      ? "red"
+      ? props.color
       : "rgb(248,248,248)";
   });
 
