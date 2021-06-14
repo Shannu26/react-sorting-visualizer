@@ -16,6 +16,7 @@ const Navbar = (props) => {
           value={props.algType}
           onChangeHandler={props.algChangeHandler}
           values={[0, 1, 2]}
+          index="0"
           options={["Bubble Sort", "Selection Sort", "Insertion Sort"]}
           isDisabled={props.isSorting}
         />
@@ -24,14 +25,18 @@ const Navbar = (props) => {
           onChangeHandler={props.sizeChangeHandler}
           values={[5, 10, 25, 50, 75, 100]}
           options={[5, 10, 25, 50, 75, 100]}
+          index="1"
           isDisabled={props.isSorting}
+          title="Size"
         />
         <Select
           value={props.speed}
           onChangeHandler={props.speedChangeHandler}
-          values={[0.25, 0.5, 1, 2, 4]}
+          values={[5, 4, 3, 2, 1]}
+          index="2"
           options={["0.25x", "0.5x", "1x", "2x", "4x"]}
           isDisabled={props.isSorting}
+          title="Speed"
         />
       </div>
     </div>

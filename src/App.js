@@ -17,7 +17,7 @@ function App() {
   const [color, setColor] = useState("red");
   const [completed, setCompleted] = useState([]);
   const [size, setSize] = useState(10);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(3);
   const [algType, setAlgType] = useState(0);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
           setIsSorting(false);
         }
       },
-      (500 * c) / speed,
+      200 * c * speed,
       [...arr],
       i,
       j,
