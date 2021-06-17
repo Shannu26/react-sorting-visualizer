@@ -24,7 +24,7 @@
 }
 
 #hamburger {
-  display: none;
+  /* display: none; */
   position: absolute;
   /* background-color: red; */
   width: 10%;
@@ -36,10 +36,10 @@
 
 @media (max-width: 1000px) {
   .navbar .nav {
-    display: none;
+    /* display: none; */
   }
   #hamburger {
-    display: block;
+    /* display: block; */
   }
 
   .navbar {
