@@ -3,6 +3,7 @@ import { useState } from "react";
 import Chart from "./components/Chart/Chart";
 import Button from "./components/Button/Button";
 import Navbar from "./components/Navbar/Navbar";
+import Description from "./components/Description/Description";
 import { useEffect } from "react";
 
 import generateArray from "./helpers/generateArray";
@@ -95,13 +96,21 @@ function App() {
         speed={speed}
         speedChangeHandler={speedChangeHandler}
       />
-      <Chart data={data} currIJ={currIJ} completed={completed} color={color} />
-      <Button
-        btnName="Sort"
-        onClickHandler={sortClickHandler}
-        isDisabled={isSorting}
-        className="sort"
-      />
+      <div className="wrapper">
+        <Chart
+          data={data}
+          currIJ={currIJ}
+          completed={completed}
+          color={color}
+        />
+        <Button
+          btnName="Sort"
+          onClickHandler={sortClickHandler}
+          isDisabled={isSorting}
+          className="sort"
+        />
+        <Description algType={algType} />
+      </div>
     </div>
   );
 }

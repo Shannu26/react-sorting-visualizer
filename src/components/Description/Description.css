@@ -1,0 +1,52 @@
+.desc-wrapper {
+  /* background-color: red; */
+  width: 80%;
+  margin: 5% auto;
+  padding: 2%;
+  border-top: 2px solid rgb(154, 154, 154);
+  text-align: justify;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.desc-wrapper h1 {
+  text-align: left;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5%;
+  margin-top: 4%;
+  font-size: 1.2rem;
+}
+
+.performance {
+  border-left: 1px solid black;
+  padding-left: 5%;
+}
+
+.performance p {
+  line-height: 2.5;
+}
+
+.url {
+  display: inline-block;
+  margin-top: 5%;
+  font-size: 1.5rem;
+  color: rgba(255, 69, 140, 0.8);
+}
+
+.url:hover {
+  color: rgb(233, 28, 106);
+}
+
+@media (max-width: 1000px) {
+  .description {
+    display: block;
+  }
+  .performance {
+    border: none;
+    padding-left: 0;
+    margin-top: 5%;
+  }
+}
