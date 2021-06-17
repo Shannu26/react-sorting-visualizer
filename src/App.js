@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import Chart from "./components/Chart/Chart";
 import Button from "./components/Button/Button";
 import Navbar from "./components/Navbar/Navbar";
@@ -23,6 +23,16 @@ function App() {
   const [speed, setSpeed] = useState(3);
   const [algType, setAlgType] = useState(0);
   const [showSidebar, setShowSidebar] = useState(false);
+
+  useLayoutEffect(() => {
+    const updateState = () => {
+      if (window.innerWidth >= 1000) setShowSidebar(false);
+    };
+    window.addEventListener("resize", updateState);
+    return () => {
+      window.removeEventListener("resize", updateState);
+    };
+  }, [showSidebar]);
 
   useEffect(() => {
     const arr = generateArray(size);
