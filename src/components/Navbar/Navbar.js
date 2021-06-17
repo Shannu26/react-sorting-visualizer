@@ -6,7 +6,10 @@ const Navbar = (props) => {
   return (
     <div className="navbar">
       <h1>Sort Visualizer</h1>
-      <div>
+      <div id="hamburger" onClick={props.toggleShowSidebar}>
+        <i className={`fa ${props.showSidebar ? "fa-times" : "fa-bars"}`}></i>
+      </div>
+      <div className="nav">
         <Button
           btnName="Randomize"
           onClickHandler={props.randomizeClickHandler}
@@ -16,7 +19,7 @@ const Navbar = (props) => {
           value={props.algType}
           onChangeHandler={props.algChangeHandler}
           values={[0, 1, 2]}
-          index="0"
+          index={[0, 1, 2].findIndex((el) => el === props.algType)}
           options={["Bubble Sort", "Selection Sort", "Insertion Sort"]}
           isDisabled={props.isSorting}
         />
@@ -25,7 +28,7 @@ const Navbar = (props) => {
           onChangeHandler={props.sizeChangeHandler}
           values={[5, 10, 25, 50, 75, 100]}
           options={[5, 10, 25, 50, 75, 100]}
-          index="1"
+          index={[5, 10, 25, 50, 75, 100].findIndex((el) => el === props.size)}
           isDisabled={props.isSorting}
           title="Size"
         />
@@ -33,7 +36,7 @@ const Navbar = (props) => {
           value={props.speed}
           onChangeHandler={props.speedChangeHandler}
           values={[5, 4, 3, 2, 1]}
-          index="2"
+          index={[5, 4, 3, 2, 1].findIndex((el) => el === props.speed)}
           options={["0.25x", "0.5x", "1x", "2x", "4x"]}
           isDisabled={props.isSorting}
           title="Speed"

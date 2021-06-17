@@ -48,7 +48,9 @@ const Select = (props) => {
       <button onClick={showListHandler} disabled={props.isDisabled}>{`${
         props.title ? props.title + ":" : ""
       } ${props.options[index]}`}</button>
-      <i className="fa fa-caret-down"></i>
+      <i
+        className={`fa fa-caret-down ${props.className ? props.className : ""}`}
+      ></i>
       {showList && <ul className="options">{options}</ul>}
     </div>
   );

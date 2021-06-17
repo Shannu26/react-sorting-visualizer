@@ -8,6 +8,8 @@
   justify-content: space-between;
   padding: 0 1%;
   margin-bottom: 2%;
+  min-height: 4rem;
+  position: relative;
 }
 
 .navbar div {
@@ -21,7 +23,32 @@
   margin: 1%;
 }
 
-@media (max-width: 800px) {
+#hamburger {
+  display: none;
+  position: absolute;
+  /* background-color: red; */
+  width: 10%;
+  right: 30px;
+  bottom: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .navbar .nav {
+    display: none;
+  }
+  #hamburger {
+    display: block;
+  }
+
+  .navbar {
+    display: block;
+    text-align: left;
+    padding-top: 2%;
+  }
+}
+/* @media (max-width: 800px) {
   .navbar {
     display: block;
     text-align: left;
@@ -40,4 +67,4 @@
   .navbar div {
     grid-template-columns: 1fr;
   }
-}
+} */

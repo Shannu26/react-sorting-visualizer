@@ -1,12 +1,12 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Chart from "./components/Chart/Chart";
 import Button from "./components/Button/Button";
 import Navbar from "./components/Navbar/Navbar";
 import Description from "./components/Description/Description";
 import ColorMeanings from "./components/ColorMeanings/ColorMeanings";
 import Footer from "./components/Footer/Footer";
-import { useEffect } from "react";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 import generateArray from "./helpers/generateArray";
 import bubbleSort from "./helpers/bubbleSort";
@@ -22,6 +22,7 @@ function App() {
   const [size, setSize] = useState(10);
   const [speed, setSpeed] = useState(3);
   const [algType, setAlgType] = useState(0);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     const arr = generateArray(size);
@@ -80,6 +81,10 @@ function App() {
     setAlgType(+e.target.value);
   };
 
+  const toggleShowSidebarHandler = () => {
+    setShowSidebar((prev) => !prev);
+  };
+
   const algorithms = {
     0: bubbleSort,
     1: selectionSort,
@@ -97,7 +102,21 @@ function App() {
         size={size}
         speed={speed}
         speedChangeHandler={speedChangeHandler}
+        toggleShowSidebar={toggleShowSidebarHandler}
+        showSidebar={showSidebar}
       />
+      {showSidebar && (
+        <Sidebar
+          isSorting={isSorting}
+          randomizeClickHandler={randomizeClickHandler}
+          algType={algType}
+          algChangeHandler={algChangeHandler}
+          sizeChangeHandler={sizeChangeHandler}
+          size={size}
+          speed={speed}
+          speedChangeHandler={speedChangeHandler}
+        />
+      )}
       <div className="wrapper">
         <Chart
           data={data}
