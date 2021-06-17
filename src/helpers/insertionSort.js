@@ -5,13 +5,15 @@ const insertionSort = (alterStateAfterTimeOut, data) => {
     let key = array[i];
     let j = i - 1;
     while (j >= 0 && array[j] > key) {
-      alterStateAfterTimeOut(array, i, j, count);
+      alterStateAfterTimeOut(array, j + 1, j, count, false, 0, "yellow");
       count++;
       array[j + 1] = array[j];
       j--;
+      alterStateAfterTimeOut(array, j + 1, j, count, false, 0, "yellow");
+      count++;
     }
     array[j + 1] = key;
-    alterStateAfterTimeOut(array, -1, j + 1, count, false, -1, "yellow");
+    alterStateAfterTimeOut(array, -1, j + 1, count, false, -1, "orange");
     count++;
   }
   for (let i = 0; i < array.length; i++) {

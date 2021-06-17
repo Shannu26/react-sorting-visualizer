@@ -11,9 +11,13 @@ const selectionSort = (alterStateAfterTimeOut, data) => {
         // console.log(arr);
       }
     }
+    alterStateAfterTimeOut(array, i, index, count, false, 0, "yellow");
+    count++;
     let temp = array[i];
     array[i] = array[index];
     array[index] = temp;
+    alterStateAfterTimeOut(array, i, index, count, false, 0, "yellow");
+    count++;
   }
   alterStateAfterTimeOut(
     array,

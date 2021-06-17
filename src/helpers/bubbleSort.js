@@ -6,9 +6,29 @@ const bubbleSort = (alterStateAfterTimeOut, data) => {
       alterStateAfterTimeOut(array, j, j + 1, count, j === 0, array.length - i);
       count++;
       if (array[j] > array[j + 1]) {
+        alterStateAfterTimeOut(
+          array,
+          j,
+          j + 1,
+          count,
+          j === 0,
+          array.length - i,
+          "yellow"
+        );
+        count++;
         let temp = array[j];
         array[j] = array[j + 1];
         array[j + 1] = temp;
+        alterStateAfterTimeOut(
+          array,
+          j,
+          j + 1,
+          count,
+          j === 0,
+          array.length - i,
+          "yellow"
+        );
+        count++;
         // console.log(arr);
       }
     }

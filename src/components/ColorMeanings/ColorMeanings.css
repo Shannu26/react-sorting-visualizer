@@ -1,0 +1,35 @@
+.color-meanings {
+  /* background-color: pink; */
+  width: 80%;
+  margin: 5% auto;
+  min-height: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+}
+
+.color-meanings div {
+  /* background-color: red; */
+  padding: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.color-meanings div span {
+  display: block;
+  margin-right: 5%;
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 1000px) {
+  .color-meanings {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .color-meanings {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

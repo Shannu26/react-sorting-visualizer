@@ -4,6 +4,8 @@ import Chart from "./components/Chart/Chart";
 import Button from "./components/Button/Button";
 import Navbar from "./components/Navbar/Navbar";
 import Description from "./components/Description/Description";
+import ColorMeanings from "./components/ColorMeanings/ColorMeanings";
+import Footer from "./components/Footer/Footer";
 import { useEffect } from "react";
 
 import generateArray from "./helpers/generateArray";
@@ -109,8 +111,10 @@ function App() {
           isDisabled={isSorting}
           className="sort"
         />
+        <ColorMeanings />
         <Description algType={algType} />
       </div>
+      <Footer />
     </div>
   );
 }
