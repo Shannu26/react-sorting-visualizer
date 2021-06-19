@@ -114,6 +114,7 @@ function App() {
         speedChangeHandler={speedChangeHandler}
         toggleShowSidebar={toggleShowSidebarHandler}
         showSidebar={showSidebar}
+        windowWidth={window.innerWidth}
       />
       {showSidebar && (
         <Sidebar

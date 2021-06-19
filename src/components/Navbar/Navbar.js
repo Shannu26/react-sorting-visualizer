@@ -5,7 +5,7 @@ import Select from "../Select/Select";
 import { useLayoutEffect, useState } from "react";
 
 const Navbar = (props) => {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(props.windowWidth >= 1000);
 
   useLayoutEffect(() => {
     const updateState = () => {
